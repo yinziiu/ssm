@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.ViewMapper">
+	
+	<!-- 全部景点列表 -->
+	<select id="findViewList" resultType="com.hz.model.View">
+		SELECT view.id,viewtype.viewtype,vname,location,intro,usertime,ticket,tips,
+		traffic,opentime,viewphoto,vreadnum FROM VIEW,viewtype 
+		WHERE view.vtid = viewtype.id
+	</select>
+	
+	<!-- 列表总数 -->
+	<select id="getViewListtotal" resultType="long">
+		select count(*) from view 
+	</select>
+	
+	<!-- 必游景点 -->
+	<select id="getbiyoutop5" resultType="com.hz.model.View">
+		SELECT view.id, vname,location,intro,viewphoto,traffic,vreadnum
+		FROM VIEW WHERE vtid = (SELECT id FROM 
+		viewtype WHERE viewtype = "必游景点") LIMIT 0,5
+	</select>
+	
+	<!-- 热门景点 -->
+	<select id="getrementop" resultType="com.hz.model.View">
+		SELECT view.id, vname,location,intro,traffic,viewphoto,vreadnum
+		FROM VIEW WHERE vtid = (SELECT id FROM 
+		viewtype WHERE viewtype = "热门景点") LIMIT 0,10
+	</select>
+	
+	<!-- 景点类型列表 -->
+	<select id="findViewList2" resultType="com.hz.model.View">
+		SELECT view.id,viewtype.viewtype,vname,location,intro,usertime,traffic,ticket,tips,
+		opentime,viewphoto,vreadnum FROM VIEW,viewtype 
+		WHERE view.vtid = viewtype.id
+	</select>
+	
+	<!-- 查找景点id和名称 -->
+	<select id="getViewName" resultType="com.hz.model.View">
+		select id , vname from view
+	</select>
+	
+	<!-- 根据id查找景点详情 -->
+	<select id="getViewDetailByID" parameterType="int" resultType="com.hz.model.View">
+		SELECT * FROM VIEW WHERE id = #{id};
+	</select>
+	
+	<!-- 美食详情页的热门景点 -->
+	<select id="getHotViewList" resultType="com.hz.model.View">
+		SELECT view.id,vname,location,traffic,vreadnum,viewphoto
+		FROM VIEW ORDER BY vreadnum DESC  LIMIT 0,3
+	</select>
+	
+	<select id="getHotViewList2" resultType="com.hz.model.View">
+		SELECT view.id,vname,location,traffic,vreadnum,viewphoto
+		FROM VIEW ORDER BY vreadnum DESC  LIMIT 0,8
+	</select>
+	
+	<!-- 后台删除景点 -->
+	<delete id="deleteView" parameterType="int">
+		DELETE FROM view WHERE id = #{id}
+	</delete>
+	
+	<select id="getViewListById" parameterType="int" resultType="com.hz.model.View">
+		SELECT viewtype.id vtid,viewtype.viewtype, view.id,vtid,viewtype.viewtype,vname,location,intro,usertime,ticket,tips,
+		traffic,opentime,viewphoto,vreadnum FROM VIEW,viewtype 
+		WHERE view.vtid = viewtype.id AND view.id = #{id}
+	</select>
+	
+	<select id="getViewIntroById" parameterType="int" resultType="String">
+		SELECT intro from view where id = #{id}
+	</select>
+	
+	<select id="getViewTicketById" parameterType="int" resultType="String">
+		SELECT ticket from view where id = #{id}
+	</select>
+	
+	<select id="getViewTrafficById" parameterType="int" resultType="String">
+		SELECT traffic from view where id = #{id}
+	</select>
+	
+	<insert id="saveView" parameterType="com.hz.model.View">
+		INSERT INTO hzmsjd.view 
+		(vtid,vname,location,intro,usertime,ticket,tips,traffic,opentime,viewphoto) VALUES
+		(#{view.vtid},#{view.vname},#{view.location},#{view.intro},#{view.usertime},#{view.ticket},
+		#{view.tips},#{view.traffic},#{view.opentime},#{view.viewphoto})
+	</insert>
+	
+	<update id="updateView" parameterType="com.hz.model.View">
+		update hzmsjd.view set
+			vtid = #{view.vtid},
+			vname = #{view.vname},
+			location = #{view.location},
+			intro = #{view.intro},
+			usertime = #{view.usertime},
+			ticket = #{view.ticket},
+			tips = #{view.tips},
+			traffic = #{view.traffic},
+			opentime = #{view.opentime}
+		where id = #{view.id}
+	</update>
+	
+	<update id="update_vphoto" parameterType="com.hz.model.View">
+		update hzmsjd.view set
+			viewphoto = #{view.viewphoto}
+		where id = #{view.id}
+	</update>
+	
+	<update id="updatevreadnum" parameterType="int">
+		update hzmsjd.view set 
+			vreadnum = #{vreadnum}
+		where id = #{id}
+	</update>
+	
+	<select id="getViewImages" parameterType="int" resultType="com.hz.model.ViewImages" >
+		SELECT view.id vid,vname,location,MID,viewimg
+		FROM VIEW,viewimages WHERE view.id = viewimages.vid AND vid = #{id}
+	</select>
+	
+	<insert id="saveViewPhoto" parameterType="com.hz.model.ViewImages">
+		INSERT INTO hzmsjd.viewimages 
+		(vid,viewimg) VALUES
+		(#{viewImages.vid},#{viewImages.viewimg})
+	</insert>
+	
+	
+</mapper>

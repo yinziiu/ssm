@@ -1,0 +1,217 @@
+@charset "utf-8";
+/*
+ sixin
+ UI:  daimeng
+ CSS:  xiaoxiao
+ date: 2016/3/23
+*/
+
+.wrap{ width:1000px; margin:0 auto; padding-bottom: 60px;}
+.wrap a:hover{text-decoration:none;}
+.wrap .back{ color: #333; font-size: 16px; line-height: 24px; padding:20px 0;}
+.chat_window{ width: 698px; border:1px solid #e5e5e5; border-radius:5px; font-size:14px;}
+.chat_window .master{ padding:20px; background-color:#f5f5f5; line-height: 48px;}
+.master .letter{width:48px; height:48px; background:url(/images/message/letter.gif) no-repeat center center #498fe3; float: left; border-radius: 50%; margin-right: 20px;}
+.master a{color:#ff9d00; display: inline-block; margin:0 0 0 5px;}
+.master .danger{margin:-8px 0 -5px 68px;color:#ef523d;line-height:20px;font-size:12px;}
+.chat_list{padding:0 20px; height:600px; overflow-y:auto;}
+.chat_list .chat_message{ margin:10px 0 15px;}
+.chat_message .time{ text-align:center; line-height: 24px; padding:3px 0 10px;}
+.chat_message .author{ width:48px;  height:48px; float:left; border-radius: 50%; float: left;}
+.chat_message.receive .author{ float: right;}
+.chat_message .autor img{ border-radius:50%;}
+.chat_message .msg{ background-color:#f5f5f5; border-radius:5px; margin:0 15px; float:left; _display:inline; padding:12px 14px; position:relative;max-width: 460px;}
+.chat_message.receive .msg{ float:right;}
+.chat_message.receive .msg a{ color: #fff; text-decoration:underline;}
+.chat_message.send .msg{ background-color:#f5f5f5; color:#666;}
+.chat_message.receive .msg{ background-color:#ff9d00; color:#fff;}
+.chat_message .msg:after{ content:""; width: 6px; height:11px; display:inline-block; background: url(/images/message/chat-icons.png) no-repeat; position:absolute;  top:6px; }
+.chat_message.send .msg:after{left: -6px;}
+.chat_message.receive .msg:after{ background-position:-10px 0; right: -6px;}
+.msg .delete{ width: 9px; height:9px; background:url(/images/message/delete.png); position:absolute; right:-19px; top:50%; display:inline-block; margin-top:-5px; display: none;}
+.chat_message.receive .msg .delete{ left: -19px; right: auto;}
+.message_con .operate{display:none;position:absolute;left:100%;line-height:20px;font-size:12px;color:#999;white-space:nowrap;top:50%;margin-top:-10px;}
+.message_con:hover .operate{display:block;}
+.message_con .msg .operate a{color:#999;display:inline-block;margin-left:20px;}
+.chat_message.receive .message_con .operate{left:auto;right:100%;}
+.chat_message.receive .message_con .operate a{margin-left:0;margin-right:20px;}
+
+.edit_block{ background-color:#fafafa; border-top:1px solid #e5e5e5; position: relative; padding-bottom: 30px;}
+.edit_block .expression{ height: 22px; padding:10px 20px; position:relative;font-size: 0;}
+.edit_block .expression>a{ width: 22px; height: 22px; display: inline-block; background: url("/images/message/icon1.png") no-repeat;}
+.edit_block .expression>a:nth-child(2){background:url("/images/message/icon22.png") no-repeat;margin-left: 20px;}
+.edit_block .expression>a:hover{background: url("/images/message/icon1-hover.png") no-repeat;}
+.edit_block .expression>a:nth-child(2):hover{background:url("/images/message/icon2-hover.png") no-repeat;margin-left: 20px;}
+.edit_block .txt textarea{ font-size: 14px; line-height: 24px; height:100%; padding:5px 20px; border:none; outline: none; width:658px; background-color: #fafafa; resize: none;}
+.edit_block .tips{ font-style: normal; position: absolute; right: 14px; bottom: 14px; font-size: 14px; color: #ccc;}
+
+    /* 2015.12.15 新表情弹出框 */
+.art_newpop{ width: 396px; height: 228px; border: 1px solid #ccc; background-color: #fff; box-shadow: 0px 0px 9px #ccc; position: absolute; left:-1px; top:-232px; z-index: 100;}
+.art_newpop_edit{ left: 0; top: -231px;}
+.art_newtab{ width: 100%; height: 34px; background-color: #f8f8f8; border-bottom: 1px solid #ccc;}
+.art_newtab span{ display: inline-block; width: 80px; height: 34px; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; font-size: 12px; text-align: center; line-height: 34px; color: #666; cursor: pointer;}
+.art_newtab span.cur{ background-color: #fff; border-bottom-color: #fff;}
+
+.art_newface{ margin: 10px auto 0; overflow: hidden;}
+.art_newface li { margin: -1px 0 0 -1px; border: 1px solid #e8e8e8; float: left; overflow: hidden; text-align: center; cursor: pointer;}
+
+.art_newface1{ width: 377px; height: 155px;}
+.art_newface1 ul{ width: 378px;}
+.art_newface1 li{ width: 28px; height: 28px; padding: 5px 7px 5px 6px;}
+.art_newface1 li img{ width: 28px; height: 28px;}
+
+.art_newface2{ width: 376px; height: 173px;}
+.art_newface2 ul{ width: 377px;}
+.art_newface2 li{ width: 23px; height: 23px; padding: 2px 3px 3px 2px;}
+.art_newface2 li img{ width: 23px; height: 23px;}
+/* 2015.12.15 新表情弹出框 end */
+
+
+/* 详情页 */
+.dialogue{width: 700px;}
+.dialogue .th{height: 22px; font-size: 16px; color:#333; padding:12px 0 28px; line-heigth:22px;}
+.dialogue .th .icon{ width:22px; height:22px; background:url("/images/message/pop_icon.png") no-repeat 0 0; float:right; cursor:pointer;}
+.dialogue .th .icon:hover{ background-position:-22px 0;}
+/* retina */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2){
+    .dialogue .th .icon{ background-img:url("/images/message/pop_icon@2x.png"); background-size:44px 22px;}
+}
+.dia_list{}
+.dia_list .item{ width: 658px; border:1px solid #e5e5e5; border-radius: 5px; padding:20px; margin-bottom:20px; -webkit-transition:box-shadow 0.25s linear 0s;transition:box-shadow 0.25s linear 0s; cursor: pointer;}
+.dia_list .item:hover{ border-color:#fc9c27; box-shadow:0 0 5px #ffa200;}
+.dia_list .item .author{width:48px; height:48px; float: left;  border-radius:50%; float:left;}
+.dia_list .item .con{width: 530px; padding-left:20px; float:left; font-size:14px;}
+.dia_list .title{line-height: 24px; margin:-5px 0 5px 0;}
+.dia_list .title .name{color:#ff9d00; display: inline-block; margin-right: 5px;}
+.dia_list .title .time{ float:right;}
+.dia_list .con p{ line-height: 24px; color: #999;}
+.dia_list .item .tool_right{ float:right; width:60px; text-align:right;}
+.dia_list .tool_right .delete{ width:9px; height: 9px; background: url("/images/message/delete.png"); display: block; margin-left:51px;}
+.dia_list .tool_right .tips{padding:0 7px; font-size: 12px; color:#fff; height:15px; line-height: 15px; background-color:#ff9d00; border-radius:5px; display: inline-block; margin-top:20px;}
+
+/* 弹层 */
+.pop_tan{ width: 100%; height: 100%; position: fixed; _posiaiton:absolute; left:0; top:0;
+    z-index:100;}
+.pop_tan .cover{ width: 100%; height: 100%; background-color:#000; opacity: 0.7; filter:alpha(opacity=70); position: absolute; left:0; top:0;}
+.tan_mian{ width:540px;  padding:20px 30px; background-color:#fff; border-radius: 5px; position: absolute; left:50%; top:50%; margin-left:-300px; margin-top:-201px;}
+.tan_mian .send_tit{ font-size: 18px; color:#333; line-height: 36px;}
+.tan_mian .send .mTitle{ width:60px; float:left; font-size: 14px; line-height:34px;}
+.tan_mian .mCon{ width:480px; float:left; position: relative;}
+.tan_mian .mCon .in_con{ width:220px; height:32px; border:1px solid #e5e5e5; display:block;padding-left: 10px; overflow:hidden;}
+.tan_mian .mCon .in_con li{ float:left;}
+.tan_mian .mCon .in_con .dia_name{ line-height:22px; margin-top:5px; height:22px;}
+.tan_mian .mCon .dia_name a{ height: 20px; border:1px solid #e5e5e5; border-radius:10px; background-color:#f6f6f6; font-size: 12px; padding:0 20px 0 13px; display: inline-block; color:#666; position:relative;}
+.tan_mian .mCon .dia_name a .delete{ width: 5px; height: 5px; background: url("/images/message/delete1.png"); display: inline-block; position: absolute; right:10px; top:8px;}
+.tan_mian .mCon .dia_name a:hover{ text-decoration: none; background-color:#ff9d00; border-color:#ff9d00; color:#fff;}
+.tan_mian .mCon .dia_name a:hover .delete{background-image:url("/images/message/delete2.png");}
+.tan_mian .mCon .in_con input{ margin:5px 0; height: 22px; line-height:22px; border:0; background:red;}
+.tan_mian .mCon .people_list{ width:232px; border-radius:4px; border:1px solid #d6d6d6; background-color:#fff; box-shadow:0 2px 0 rgba(0,0,0,.1); position: absolute; left:0; top:40px; z-index: 3;}
+.tan_mian .mCon .people_list a{ width:222px; height:24px; line-height: 24px; display:block; padding-left:10px; color:#666;}
+.tan_mian .mCon .people_list a:hover{ background-color:#f2f2f2; text-decoration:none;}
+.tan_mian .mCon span{ color:#999; display:block; line-height: 24px; padding:3px 0 12px;}
+
+.tan_mian textarea{ width:468px; height:158px; border:1px solid #e5e5e5; outline: none; resize: none; line-height: 20px; padding:5px; overflow-y:auto;}
+.tan_mian .btn{text-align:right;}
+.tan_mian .btn a{ width:110px; height:40px; font-size:16px; color:#fff; text-align:center; line-height:40px;display: inline-block;background-color:#ff9d00; border-radius:5px; margin:30px 0 10px 20px;}
+.tan_mian .btn a:hover{ text-decoration: none;}
+.tan_mian .btn .cancle{ background-color:#efefef; color:#999;}
+.tan_mian .btn .cancle:hover{ background-color:#666; color:#fff;}
+.tan_mian .btn .send:hover{ background-color:#ff8a00; color:#fff;}
+.tan_mian .close{ width: 36px; height:26px; background: url(/images/other/popctn_bg.png) 0 -165px no-repeat; display: inline-block; position:absolute; right:0; top:10px;}
+.tan_mian .close i{width:9px; height: 9px; background: url(/images/other/i_cross.gif) no-repeat; display: inline-block; margin:8px 0 0 8px; -webkit-transition: 1s ease-in-out 0s;transition: 1s ease-in-out 0s;}
+.tan_mian .close:hover i{ -webkit-transform:rotate(360deg);transform:rotate(360deg);}
+
+/* pagination */
+.m-pagination{padding:20px 5px;line-height:24px;font-size:12px;color:#999;}
+.m-pagination .count{padding-right:12px;}
+.m-pagination .pi{display:inline-block;margin-right:1px;margin-left:1px;padding:0 7px;border:0 none;background:none;border-radius:4px;color:#666;vertical-align:middle;}
+.m-pagination .pi:hover{background-color:#efefef;border:0 none;text-decoration:none;color:#666;}
+.m-pagination .pg-first,.m-pagination .pg-prev,.m-pagination .pg-next,.m-pagination .pg-last,.m-pagination .pg-current{display:inline-block;margin-right:5px;background-color:#ff9d00;padding:0 5px;border-radius:4px;color:#fff;vertical-align:middle;}
+.m-pagination .pg-first:hover,.m-pagination .pg-prev:hover,.m-pagination .pg-next:hover,.m-pagination .pg-last:hover{background-color:#ff8a00;color:#fff;text-decoration:none;}
+.m-pagination .pg-current{padding:0 7px;}
+.m-pagination .pg-jump input{margin:0 3px 0 0;border:1px solid #d2d2d2;border-radius:4px;height:22px;padding:0 5px;width:30px;line-height:22px;font-size:12px;text-align:center;vertical-align:middle;}
+.m-pagination .pg-jump a{display:inline-block;border:0 none;background-color:#ffc75a;padding:0 7px;border-radius:4px;color:#fff;vertical-align:middle;}
+.m-pagination .pg-jump a:hover{text-decoration:none;background-color:#ff8a00;color:#fff;}
+
+/* 文章消息添加按钮 */
+.th .news{ font-size: 12px; color: #999;}
+.th .news .checkbox{ width:16px; height: 16px; background:url("/images/message/select_icon.png") no-repeat 0 0; display: inline-block; vertical-align:-3px; margin-left:30px; cursor: pointer;}
+.th .news .checkbox.on{ background-position:-16px 0;}
+
+
+/*v新增加loading */
+.loading{ color: #666; display:block; text-align:center; font-size: 14px; line-height: 24px;}
+.loading:hover{ color: #666;}
+.loading i{ width: 12px; height: 13px; background: url("/images/message/arrow_up.png"); display: inline-block; margin-right:5px;}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2){
+
+    .loading i{ background:url("/images/message/arrow_up@2x.png"); background-size: 12px 13px;}
+
+}
+
+/* 2016.4.25新增loading的icon BY HWJ */
+.loading-icon{ width: 22px; height: 4px; margin: 10px auto 6px; background: url("/images/message/loading.gif") no-repeat;}
+
+i.gf{height: 20px; line-height: 20px; background-color:#ff9d00; color: #fff; text-align: center; padding:0 10px; display:inline-block;*zoom: 1; *display:inline; border-radius: 10px; font-style:normal; font-size: 12px; vertical-align:2px;}
+
+
+/*改动*/
+.state{width: 560px;height: 40px;background: #fff5e5;border-radius: 5px;text-align: center;line-height: 40px;margin: 0 auto;font-size: 12px;color: #ff9d00;}
+.state i{display: inline-block;width: 16px;height: 16px;background: url(/images/message/state.png) no-repeat;margin-right: 6px;vertical-align: middle;margin-top: -2px;}
+@media (min-resolution:1.25dppx),(-webkit-min-device-pixel-ratio:1.25),(min-device-pixel-ratio:1.25){
+    .edit_block .expression>a{ width: 22px; height: 22px; display: inline-block; background: url("/images/message/icon1@2x.png") no-repeat;background-size: 22px 22px;}
+    .edit_block .expression>a:nth-child(2){background:url("/images/message/icon2@2x.png") no-repeat;margin-left: 20px;background-size: 22px 22px;}
+    .edit_block .expression>a:hover{background: url("/images/message/icon1@2x-hover.png") no-repeat;background-size: 22px 22px;}
+    .edit_block .expression>a:nth-child(2):hover{background:url("/images/message/icon2@2x-hover.png") no-repeat;margin-left: 20px;background-size: 22px 22px;}
+}
+.chat_message.send .msg1{max-width: 528px;background: 0 none;padding: 0;}
+.chat_message.send .msg1:after{display: none;}
+.chat_message.receive .msg1:after{display: none;}
+.chat_message.receive .msg1{max-width: 528px;padding: 0;background: 0 none;}
+.msg1 .failed{font-size: 14px;color: #ef523d;text-align: right;margin-top: 10px;}
+/*.msg1 a img{border-radius: 5px;}*/
+.msg1 p{position: relative;}
+.msg1 p img{border-radius: 5px;}
+/*.msg1 .img-wrapper{position: relative;}*/
+/*.msg1 .mask{width: 100%;height: 100%;position: absolute;left: 0;top:0;bottom:0;right:0;background: rgba(0,0,0,.5);}*/
+.msg1 p .mask{display: block;width: 100%;height: 100%;position: absolute;left: 0;top:0;bottom:0;right:0;background: rgba(0,0,0,.5);border-radius: 5px;}
+.msg1 p .mask .loading11,.msg1 p .mask .loading12{position:absolute;z-index:-1;left:50%;top:50%;background:url(/images/message/loading-small.png) no-repeat; z-index: 50; }
+.msg1 p .mask .loading11{width:80px;height:80px;margin:-42px 0 0 -38px;-webkit-animation:loading-photo 1s ease 0s infinite normal running;animation:loading-photo 1s ease 0s infinite normal running;}
+.msg1 p .mask .loading12{width:36px;height:32px;margin:-18px 0 0 -16px;background-position:-264px 0;}
+@-webkit-keyframes loading-photo{
+    0%{-webkit-transform:rotate(0);}
+    100%{transform:rotate(360deg);}
+}
+@keyframes loading-photo{
+    0%{transform:rotate(0);}
+    100%{transform:rotate(360deg);}
+}
+.msg1 p .mask{transform:translateZ(0px)}
+
+
+.edit_block .expression a.chose-img{background:url("/images/message/icon22.png") no-repeat;margin-left: 20px;}
+.edit_block .expression a.chose-img:hover{background:url("/images/message/icon2-hover.png") no-repeat;margin-left: 20px;}
+@media (min-resolution:1.25dppx),(-webkit-min-device-pixel-ratio:1.25),(min-device-pixel-ratio:1.25){
+    .edit_block .expression a.chose-img{background:url("/images/message/icon2@2x.png") no-repeat;margin-left: 20px;background-size: 22px 22px;}
+    .edit_block .expression a.chose-img:hover{background:url("/images/message/icon2@2x-hover.png") no-repeat;margin-left: 20px;background-size: 22px 22px;}
+}
+.msg1 img{display: block;}
+
+
+/* 链接消息 */
+.chat_message .app{width:458px;border:1px solid #e5e5e5;background-color:#fff!important;padding:0;}
+.chat_message .app a{display:block;}
+.chat_message .app a:hover{text-decoration:none;}
+.chat_message.send .app:after{width:8px;height:12px;background-position:-20px 0;left:-7px;}
+.chat_message.receive .app:after{width:8px;height:12px;background-position:-30px 0;left:auto;right:-7px;}
+.app_cont{padding:15px;min-height:68px;}
+.app_cont .cover{float:left;display:inline;margin-right:15px;width:68px;height:68px;background:url(/images/message/chat-icons.png) no-repeat 0 -20px;}
+.app_cont .detail{overflow:hidden;}
+.app_cont h4{margin-bottom:3px;font-weight:normal;font-size:16px;line-height:24px;margin-top:-3px;color:#ff9d00;}
+.app_cont p{margin-top:4px;width:345px;height:20px;line-height:20px;color:#999;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.app_from{height:26px;background-color:#f6f6f6;border-top:1px solid #e5e5e5;border-bottom-left-radius:5px;border-bottom-right-radius:5px;font-size:12px;color:#999;padding-left:15px;line-height:26px;}
+.app_cont .highlight{color:#ff9d00;}
+.app_cont .price{font-size:22px;color:#fb6a27;vertical-align:middle;}
+.app_cont .price em{font-style:normal;font-size:14px;}
+.app_cont .discount{display:inline-block;border:1px solid #fb6a27;border-radius:3px;font-size:12px;color:#fb6a27;padding:0 4px;line-height:14px;vertical-align:middle;}
+

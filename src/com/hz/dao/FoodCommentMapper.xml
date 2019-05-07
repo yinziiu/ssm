@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.FoodCommentMapper">
+	
+	<select id="getFoodCommentList" resultType="com.hz.model.FoodComment">
+		SELECT users.username,users.photo,food.fname,fcomment.id,fcomment,fcommenttime,
+		fcphoto FROM users,food,fcomment 
+		WHERE fcomment.uid = users.id AND fcomment.fid = food.id
+	</select>
+	
+	<select id="getFoodCommentListtotal" resultType="long">
+		select count(*) from fcomment
+	</select>
+	
+	<select id="getFoodCommentList2" resultType="com.hz.model.FoodComment">
+		SELECT users.username,users.photo,food.fname,food.freadnum,food.fphoto,fcomment.id,fcomment,fcommenttime,
+		fcphoto,fcomment.fid FROM users,food,fcomment 
+		WHERE fcomment.uid = users.id AND fcomment.fid = food.id
+		GROUP BY fid
+		ORDER BY freadnum DESC LIMIT 0,2 
+	</select>
+	
+	<!-- 详情页面的点评 -->
+	<select id="getFoodCommentListByFID" parameterType="int" resultType="com.hz.model.FoodComment">
+		SELECT fcomment.id,fcomment.fcommenttime,fcomment.fcomment,fcomment.fcphoto,
+		fcomment.fid,uid,users.id uid,users.username,users.photo FROM fcomment,users
+		WHERE fcomment.uid = users.id AND fid = #{id}
+	</select>
+	
+	<!-- 详情页面的点评总数 -->
+	<select id="getFoodCommentListTotalByFID" parameterType="int" resultType="long">
+		SELECT COUNT(*) FROM fcomment WHERE fid = #{id}
+	</select>
+	
+	<select id="getFoodCommentByUId" parameterType="int" resultType="com.hz.model.FoodComment">
+		SELECT food.id,food.fname,fcomment.id,fid,fcomment,fcommenttime,fcphoto
+		FROM food,fcomment WHERE food.id = fcomment.fid AND uid = #{id}
+	</select>
+	
+	<select id="getFoodCommentTotalByUId" parameterType="int" resultType="long">
+		SELECT COUNT(*) FROM fcomment WHERE uid = #{id}
+	</select>
+	
+	<select id="getFoodComment2ByUId" parameterType="int" resultType="com.hz.model.FoodComment">
+		SELECT food.id,food.fname,food.fphoto,fcomment.id,fid,fcomment,fcommenttime,fcphoto
+		FROM food,fcomment WHERE food.id = fcomment.fid AND uid = #{id}
+		ORDER BY fcommenttime desc
+	</select>
+	
+	<!-- 后台删除 -->
+	<delete id="deleteFComment" parameterType="int">
+		DELETE FROM fcomment WHERE id = #{id}
+	</delete>
+	
+	<insert id="saveFoodComment" parameterType="com.hz.model.FoodComment">
+		INSERT INTO hzmsjd.fcomment 
+		(uid,fid,fcomment,fcommenttime,fcphoto) VALUES
+		(#{foodComment.uid},#{foodComment.fid},#{foodComment.fcomment},
+		#{foodComment.fcommenttime},#{foodComment.fcphoto})
+	</insert>
+	
+	<update id="updateFoodComment" parameterType="com.hz.model.FoodComment">
+		UPDATE hzmsjd.fcomment  SET
+			fcomment = #{foodComment.fcomment},
+			fcommenttime = #{foodComment.fcommenttime}
+		WHERE id = #{foodComment.id}
+	</update>
+	
+	<update id="updateFoodCommentPhoto" parameterType="com.hz.model.FoodComment">
+		UPDATE hzmsjd.fcomment  SET
+			fcphoto = #{foodComment.fcphoto}
+		WHERE id = #{foodComment.id}
+	</update>
+	
+</mapper>

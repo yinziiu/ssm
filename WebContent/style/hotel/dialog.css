@@ -1,0 +1,67 @@
+/* dialog.css */
+.dialog-mask {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, .6);
+}
+.dialog-mask-show {
+    display: block;
+    z-index: 99;
+}
+
+.dialog-container {
+    position: fixed;
+    z-index: -1;
+    top: 50% !important;
+    left: 50% !important;
+    border: 1px solid rgba(0, 0, 0, .6);
+    padding: 30px;
+    width: 350px;
+    background-color: #fff;
+    display: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.dialog-container-show {
+    display: block;
+    z-index: 100;
+}
+.dialog-content {
+    padding: 0 10px;
+    font-size: 14px;
+    color: #000;
+}
+.dialog-content p {
+    text-align: left;
+    line-height: 24px;
+}
+.dialog-confirm-btn {
+    margin: 15px auto 0;
+    width: 88%;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    background-color: #ff9d00;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.dialog-tips {
+    padding-top: 10px;
+    font-size: 14px;
+    color: #e50202;
+    padding-left: 54px;
+}

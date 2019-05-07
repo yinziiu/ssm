@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.ViewTypeMapper">
+
+	<!-- 查找用户列表 -->
+	<select id="getViewTypeList" resultType="com.hz.model.ViewType">
+		SELECT * FROM viewtype
+	</select>
+	
+	<!-- 用户总数 -->
+	<select id="getViewTypeListTotal" resultType="long">
+		select count(*) from viewtype
+	</select>
+	
+	<select id="CheckViewType" parameterType="com.hz.model.ViewType" resultType="com.hz.model.ViewType">
+		SELECT viewtype FROM viewtype where viewtype = #{viewtype.viewtype}
+	</select>
+	
+	<insert id="saveViewType" parameterType="com.hz.model.ViewType">
+		INSERT INTO hzmsjd.viewtype (viewtype) VALUES
+		(#{viewtype.viewtype})
+	</insert>
+	
+	<select id="getViewTypeById" parameterType="int" resultType="com.hz.model.ViewType">
+		SELECT * FROM viewtype where id = #{id}
+	</select>
+	
+	<update id="updateViewType" parameterType="com.hz.model.ViewType">
+		UPDATE viewtype SET viewtype = #{viewtype.viewtype} 
+		WHERE id = #{viewtype.id}
+	</update>
+	
+	<delete id="deleteViewType" parameterType="int">
+		DELETE FROM viewtype WHERE id = #{id}
+	</delete>
+
+</mapper>

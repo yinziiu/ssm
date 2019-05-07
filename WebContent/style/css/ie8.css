@@ -1,0 +1,12 @@
+.main  .block-item .login .user{
+                        height: 36px;
+                    
+}
+.main  .block-item .login .username,.userpwd{
+	padding-top: 10px;
+	background: transparent;
+}
+td{
+	padding-top: 10px;
+                    
+}

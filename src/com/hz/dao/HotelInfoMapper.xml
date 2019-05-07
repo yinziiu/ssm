@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.HotelInfoMapper">
+
+	<!-- 根据酒店id，获取房间列表 -->
+	<select id="getRoomListById" parameterType="int" resultType="com.hz.model.HotelRoomType">
+		SELECT * FROM hroomtypeprice WHERE hid = #{id}
+	</select>
+	
+	<!-- 获取基本信息列表 -->
+	<select id="getHotelInfoListById" parameterType="int" resultType="com.hz.model.HotelInfo">
+		SELECT * FROM hotelinfo WHERE hid = #{id}
+	</select>
+	
+	<!-- 获取酒店服务列表 -->
+	<select id="getHotelServiceListById" parameterType="int" resultType="com.hz.model.HotelService1">
+		SELECT * FROM hotelservice WHERE hid = #{id}
+	</select>
+	
+	<!-- 获取酒店设施列表 -->
+	<select id="getHotelFacListById" parameterType="int" resultType="com.hz.model.HotelFac">
+		SELECT * FROM hotelfac WHERE hid = #{id}
+	</select>
+	
+	<!-- 获取房间设施列表 -->
+	<select id="getHotelRoomInfoListById" parameterType="int" resultType="com.hz.model.HotelRoomInfo">
+		SELECT * FROM hroominfo WHERE hid = #{id}
+	</select>
+	
+	<!-- 获取酒店故事列表 -->
+	<select id="getHotelStoryListById" parameterType="int" resultType="com.hz.model.HotelStory">
+		SELECT * FROM hotelstory WHERE hid = #{id}
+	</select>
+	
+	
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+	<!-- 后台酒店类型  -->
+	<select id="getHotelType" resultType="com.hz.model.HotelType">
+		SELECT * FROM hoteltype
+	</select>
+	
+	<!-- 检查酒店类型是否存在 -->
+	<select id="CheckHotelType" parameterType="com.hz.model.HotelType" resultType="com.hz.model.HotelType">
+		SELECT hoteltype FROM hoteltype where hoteltype = #{hotelType.hoteltype}
+	</select>
+	
+	
+	<!--添加酒店类型 -->
+	<insert id="saveHotelType" parameterType="com.hz.model.HotelType">
+		INSERT INTO hzmsjd.hoteltype (hoteltype) VALUES
+		(#{hotelType.hoteltype})
+	</insert>
+	
+	<!--根据酒店类型id查找 -->
+	<select id="getHotelTypeById" parameterType="int" resultType="com.hz.model.HotelType">
+		SELECT * FROM hoteltype where id = #{id}
+	</select>
+	
+	<!-- 编辑酒店类型 -->
+	<update id="updateHotelType" parameterType="com.hz.model.HotelType">
+		UPDATE hoteltype SET hoteltype = #{hotelType.hoteltype} 
+		WHERE id = #{hotelType.id}
+	</update>
+	
+	<!-- 删除酒店类型 -->
+	<delete id="deleteHotelType" parameterType="int">
+		DELETE FROM hoteltype WHERE id = #{id}
+	</delete>
+	
+	<select id="getHotelTypeTotal" resultType="long">
+		SELECT count(*) FROM hoteltype
+	</select>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+	
+	<!-- 后台酒店房型  -->
+	<select id="getHotelRoomType" resultType="com.hz.model.HotelRoomType">
+		SELECT hotel.id hid,hotel.hname,hroomtypeprice.id,hid,htype,hnum,hprice,roomtotal,roomphoto
+		FROM hotel,hroomtypeprice WHERE hotel.id = hroomtypeprice.hid
+	</select>
+	
+	<select id="getHotelRoomById" parameterType="int" resultType="com.hz.model.HotelRoomType">
+		SELECT hotel.id hid,hotel.hname,hotel.address,hroomtypeprice.id,hid,htype,hnum,hprice,roomtotal,
+		roomphoto FROM hotel,hroomtypeprice WHERE hotel.id=hroomtypeprice.hid
+		AND hroomtypeprice.id= #{id }
+	</select>
+	
+	
+	<select id="getHotelRoomTypeTotal" resultType="long">
+		SELECT count(*) FROM hroomtypeprice
+	</select>
+	
+	<select id="getHotelRoomType2" resultType="com.hz.model.HotelRoomType">
+		SELECT hotel.id hid,hotel.hname,hroomtypeprice.id,hid,htype,hnum,hprice,roomtotal,roomphoto
+		FROM hotel,hroomtypeprice WHERE hotel.id = hroomtypeprice.hid and hid = #{id }
+	</select>
+	
+	<select id="getHotelRoomTypeTotal2" resultType="long">
+		SELECT count(*) FROM hroomtypeprice where hid = #{id }
+	</select>
+	
+	<select id="getHotelRoomPhoto" parameterType="int" resultType="com.hz.model.HotelRoomType">
+		select * from hroomtypeprice where id = #{id }
+	</select>
+	
+	<!-- 检查酒店房型是否存在 -->
+	<select id="CheckHotelRoomType" parameterType="com.hz.model.HotelRoomType" resultType="com.hz.model.HotelRoomType">
+		SELECT htype FROM hroomtypeprice where htype = #{hotelRoomType.htype}
+	</select>
+	
+	<!--添加酒店房型 -->
+	<insert id="saveHotelRoomType" parameterType="com.hz.model.HotelRoomType">
+		INSERT INTO hzmsjd.hroomtypeprice 
+		(hid,htype,hnum,hprice,roomtotal,roomphoto) VALUES
+		(#{hotelRoomType.hid},#{hotelRoomType.htype},#{hotelRoomType.hnum},
+		#{hotelRoomType.hprice},#{hotelRoomType.roomtotal},#{hotelRoomType.roomphoto})
+	</insert>
+	
+	<!--根据酒店房型id查找 -->
+	<select id="getHotelRoomTypeById" parameterType="int" resultType="com.hz.model.HotelRoomType">
+		SELECT * FROM hroomtypeprice where id = #{id}
+	</select>
+	
+	<!-- 编辑酒店房型 -->
+	<update id="updateHotelRoomType" parameterType="com.hz.model.HotelRoomType">
+		UPDATE hroomtypeprice  set
+			hid = #{hotelRoomType.hid},
+			htype = #{hotelRoomType.htype},
+			hnum = #{hotelRoomType.hnum},
+			hprice = #{hotelRoomType.hprice},
+			roomtotal = #{hotelRoomType.roomtotal},
+			roomphoto = #{hotelRoomType.roomphoto}
+		WHERE id = #{hotelRoomType.id}
+	</update>
+	
+	<!-- 编辑酒店房型 -->
+	<update id="updateHotelRoomPhoto" parameterType="com.hz.model.HotelRoomType">
+		UPDATE hroomtypeprice  set
+			roomphoto = #{hotelRoomType.roomphoto}
+		WHERE id = #{hotelRoomType.id}
+	</update>
+	
+	<delete id="deleteHotelRoomType" parameterType="int">
+		DELETE FROM hroomtypeprice WHERE id = #{id}
+	</delete>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+	
+	<!-- 后台酒店信息  -->
+	<select id="getHotelInfo" resultType="com.hz.model.HotelInfo">
+		SELECT hotel.id hid,hotel.hname,hotelinfo.id,hid,checkintime,checkouttime,activate,scale
+		FROM hotelinfo,hotel WHERE hotel.id = hotelinfo.hid
+	</select>
+	
+	<select id="getHotelInfoTotal" resultType="long">
+		SELECT count(*) FROM hotelinfo
+	</select>
+	
+	<select id="getHotelInfo2" resultType="com.hz.model.HotelInfo" parameterType="int">
+		SELECT hotel.id hid,hotel.hname,hotelinfo.id,hid,checkintime,checkouttime,activate,scale
+		FROM hotelinfo,hotel WHERE hotel.id = hotelinfo.hid AND hid = #{id}
+	</select>
+	
+	<select id="getHotelInfoTotal2" resultType="long" parameterType="int">
+		SELECT count(*) FROM hotelinfo WHERE hid = #{id}
+	</select>
+	
+	<!--添加酒店信息-->
+	<insert id="saveHotelInfo" parameterType="com.hz.model.HotelInfo">
+		INSERT INTO hzmsjd.hotelinfo 
+		(hid,checkintime,checkouttime,activate,scale) VALUES
+		(#{hotelInfo.hid},#{hotelInfo.checkintime},#{hotelInfo.checkouttime},
+		#{hotelInfo.activate},#{hotelInfo.scale})
+	</insert>
+	
+	<!--根据酒店信息id查找 -->
+	<select id="getHotelInfoById" parameterType="int" resultType="com.hz.model.HotelInfo">
+		SELECT * FROM hotelinfo where id = #{id}
+	</select>
+	
+	<!-- 编辑酒店信息-->
+	<update id="updateHotelInfo" parameterType="com.hz.model.HotelInfo">
+		UPDATE hotelinfo  set hid = #{hotelInfo.hid},checkintime = #{hotelInfo.checkintime},
+		checkouttime = #{hotelInfo.checkouttime},activate = #{hotelInfo.activate},scale = #{hotelInfo.scale} 
+		<!-- <set>
+			<if test="hid != null and hid != ''">hid = #{hotelInfo.hid},</if>
+			<if test="checkintime != null and checkintime != ''">checkintime = #{hotelInfo.checkintime},</if>
+			<if test="checkouttime != null and checkouttime != ''">checkouttime = #{hotelInfo.checkouttime},</if>
+			<if test="activate != null and activate != ''">activate = #{hotelInfo.activate},</if>
+			<if test="scale != null and scale != ''">scale = #{hotelInfo.scale}</if>
+		</set> -->
+		WHERE id = #{hotelInfo.id}
+	</update>
+	
+	<delete id="deleteHotelInfo" parameterType="int">
+		DELETE FROM hotelinfo WHERE id = #{id}
+	</delete>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+
+	<!-- 后台酒店服务  -->
+	<select id="getHotelService" resultType="com.hz.model.HotelService1">
+		SELECT hotel.id hid,hotel.hname,hotelservice.id,hotelservice.hid,hotelservice.name 
+		FROM hotelservice,hotel WHERE hotel.id = hotelservice.hid
+	</select>
+	
+	<select id="getHotelServiceByHid" parameterType="int" resultType="com.hz.model.HotelService1">
+		SELECT hotel.id hid,hotel.hname,hotelservice.id,hotelservice.hid,hotelservice.name 
+		FROM hotelservice,hotel WHERE hotel.id = hotelservice.hid and hotelservice.hid = #{hid}
+	</select>
+	
+	<select id="getHotelServiceByHidTotal" parameterType="int" resultType="long">
+		SELECT count(hid) FROM hservice where hservice.hid = #{hid}
+	</select>
+	
+	<select id="getHotelServiceTotal" resultType="long">
+		SELECT count(*) FROM hotelservice
+	</select>
+	
+	<!-- 检查酒店服务是否存在 -->
+	<select id="CheckHotelService" parameterType="com.hz.model.HotelService1" resultType="com.hz.model.HotelService1">
+		SELECT name FROM hotelservice where name = #{hotelService1.name}
+	</select>
+	
+	
+	<!--添加酒店服务 -->
+	<insert id="saveHotelService" parameterType="com.hz.model.HotelService1">
+		INSERT INTO hzmsjd.hotelservice (hid,name) VALUES
+		(#{hotelService1.hid},#{hotelService1.name})
+	</insert>
+	
+	<!--根据酒店服务id查找 -->
+	<select id="getHotelServiceById" parameterType="int" resultType="com.hz.model.HotelService1">
+		SELECT hotel.id hid,hotel.hname,hotelservice.id,hotelservice.hid,hotelservice.name 
+		FROM hotelservice,hotel WHERE hotel.id = hotelservice.hid and hotelservice.id = #{id}
+	</select>
+	
+	<!-- 编辑酒店服务 -->
+	<update id="updateHotelService" parameterType="com.hz.model.HotelService1">
+		UPDATE hotelservice SET hid = #{hotelService1.hid},name = #{hotelService1.name} 
+		WHERE id = #{hotelService1.id}
+	</update>
+	
+	<delete id="deleteHotelService" parameterType="int">
+		DELETE FROM hotelservice WHERE id = #{id}
+	</delete>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+	
+	<!-- 后台酒店设备  -->
+	<select id="getHotelFac" resultType="com.hz.model.HotelFac">
+		SELECT hotel.id hid,hotel.hname,hotelfac.id,hotelfac.hid,hotelfac.name 
+		FROM hotelfac,hotel WHERE hotel.id = hotelfac.hid
+	</select>
+	
+	<select id="getHotelFacTotal" resultType="long">
+		SELECT count(*) FROM hotelfac
+	</select>
+	
+	<!-- 检查酒店设备是否存在 -->
+	<select id="CheckHotelFac" parameterType="com.hz.model.HotelFac" resultType="com.hz.model.HotelFac">
+		SELECT name FROM hotelfac where name = #{hotelFac.name}
+	</select>
+	
+	<!--添加酒店设备 -->
+	<insert id="saveHotelFac" parameterType="com.hz.model.HotelFac">
+		INSERT INTO hzmsjd.hotelfac (hid,name) VALUES
+		(#{hotelFac.hid},#{hotelFac.name})
+	</insert>
+	
+	<!--根据酒店设备id查找 -->
+	<select id="getHotelFacById" parameterType="int" resultType="com.hz.model.HotelFac">
+		SELECT hotel.id hid,hotel.hname,hotelfac.id,hotelfac.hid,hotelfac.name 
+		FROM hotelfac,hotel WHERE hotel.id = hotelfac.hid and hotelfac.id = #{id}
+	</select>
+	
+	<select id="getHotelFacByHId" parameterType="int" resultType="com.hz.model.HotelFac">
+		SELECT hotel.id hid,hotel.hname,hotelfac.id,hotelfac.hid,hotelfac.name 
+		FROM hotelfac,hotel WHERE hotel.id = hotelfac.hid and hotelfac.hid = #{hid}
+	</select>
+	
+	<select id="getHotelFacTotalByHId" parameterType="int" resultType="long">
+		SELECT count(hid) FROM hotelfac where hotelfac.hid = #{hid}
+	</select>
+	
+	<!-- 编辑酒店设备 -->
+	<update id="updateHotelFac" parameterType="com.hz.model.HotelFac">
+		UPDATE hotelfac SET hid=#{hotelFac.hid},name=#{hotelFac.name} 
+		WHERE id = #{hotelFac.id}
+	</update>
+	
+	<delete id="deleteHotelFac" parameterType="int">
+		DELETE FROM hotelfac WHERE id = #{id}
+	</delete>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+	
+	<!-- 后台房间设备  -->
+	<select id="getHotelRoomInfo" resultType="com.hz.model.HotelRoomInfo">
+		SELECT hotel.id hid,hotel.hname,hroominfo.id,hroominfo.hid,hroominfo.name 
+		FROM hroominfo,hotel WHERE hotel.id = hroominfo.hid 
+	</select>
+	
+	<select id="getHotelRoomInfoTotal" resultType="long">
+		SELECT count(*) FROM hroominfo
+	</select>
+	
+	<!-- 检查房间设备是否存在 -->
+	<select id="CheckHotelRoomInfo" parameterType="com.hz.model.HotelRoomInfo" resultType="com.hz.model.HotelRoomInfo">
+		SELECT name FROM hroominfo where name = #{hotelRoomInfo.name}
+	</select>
+	
+	<!--添加房间设备 -->
+	<insert id="saveHotelRoomInfo" parameterType="com.hz.model.HotelRoomInfo">
+		INSERT INTO hzmsjd.hroominfo (hid,name) VALUES
+		(#{hotelRoomInfo.hid},#{hotelRoomInfo.name})
+	</insert>
+	
+	<!--根据房间设备id查找 -->
+	<select id="getHotelRoomInfoById" parameterType="int" resultType="com.hz.model.HotelRoomInfo">
+		SELECT hotel.id hid,hotel.hname,hroominfo.id,hroominfo.hid,hroominfo.name 
+		FROM hroominfo,hotel WHERE hotel.id = hroominfo.hid and hroominfo.id = #{id}
+	</select>
+	
+	<select id="getHotelRoomInfoByHId" parameterType="int" resultType="com.hz.model.HotelRoomInfo">
+		SELECT hotel.id hid,hotel.hname,hroominfo.id,hroominfo.hid,hroominfo.name 
+		FROM hroominfo,hotel WHERE hotel.id = hroominfo.hid and hroominfo.hid = #{hid}
+	</select>
+	
+	<select id="getHotelRoomInfoTotalByHId" parameterType="int" resultType="long">
+		SELECT count(hid) FROM hroominfo where hroominfo.hid = #{hid}
+	</select>
+	
+	<!-- 编辑房间设备 -->
+	<update id="updateHotelRoomInfo" parameterType="com.hz.model.HotelRoomInfo">
+		UPDATE hroominfo SET hid=#{hotelRoomInfo.hid}, name = #{hotelRoomInfo.name} 
+		WHERE id = #{hotelRoomInfo.id}
+	</update>
+	
+	<delete id="deleteHotelRoomInfo" parameterType="int">
+		DELETE FROM hroominfo WHERE id = #{id}
+	</delete>
+
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+
+	<!-- 后台酒店攻略  -->
+	<select id="getHotelStory" resultType="com.hz.model.HotelStory">
+		SELECT hotel.id hid,hotel.hname,hotelstory.id,hid,gushi 
+		FROM hotel,hotelstory WHERE hotel.id = hotelstory.hid
+	</select>
+	
+	<select id="getHotelStoryTotal" resultType="long">
+		SELECT count(*) FROM hotelstory
+	</select>
+	
+	<!--添加酒店攻略 -->
+	<insert id="saveHotelStory" parameterType="com.hz.model.HotelStory">
+		INSERT INTO hzmsjd.hotelstory (hid,gushi) VALUES
+		(#{hotelStory.hid},#{hotelStory.gushi})
+	</insert>
+	
+	<!--根据酒店攻略id查找 -->
+	<select id="getHotelStoryById" parameterType="int" resultType="com.hz.model.HotelStory">
+		SELECT * FROM hotelstory where id = #{id}
+	</select>
+	
+	<select id="getHotelStoryById2" parameterType="int" resultType="com.hz.model.HotelStory">
+		SELECT hotel.id hid,hotel.hname,hotelstory.id,hid,gushi 
+		FROM hotel,hotelstory WHERE hotel.id = hotelstory.hid and hid = #{id}
+	</select>
+	
+	<select id="getHotelStoryTotal2" resultType="long">
+		SELECT count(*) FROM hotelstory where hid = #{id}
+	</select>
+	
+	<!-- 编辑酒店攻略 -->
+	<update id="updateHotelStory" parameterType="com.hz.model.HotelStory">
+		UPDATE hotelstory SET gushi = #{hotelStory.gushi} 
+		WHERE id = #{hotelStory.id}
+	</update>
+	
+	<delete id="deleteHotelStory" parameterType="int">
+		DELETE FROM hotelstory WHERE id = #{id}
+	</delete>
+
+</mapper>

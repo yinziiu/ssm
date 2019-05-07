@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.HotelCommentMapper">
+	
+	
+	<select id="getHotelCommentList" resultType="com.hz.model.HotelComment">
+		SELECT users.username,users.photo,hotel.hname,hcomment.id,hcomment,hcommenttime,
+		hcphoto FROM users,hotel,hcomment 
+		WHERE hcomment.uid = users.id AND hcomment.hid = hotel.id
+	</select>
+	
+	<select id="getHotelCommentListtotal" resultType="long">
+		select count(*) from hcomment
+	</select>
+	
+	<!-- 查询出2 -->
+	<select id="getHotelCommentList2" resultType="com.hz.model.HotelComment">
+		SELECT users.username,users.photo,hotel.hname,hotel.hreadnum,hphoto,hcomment.id,hcomment.hid,hcomment,hcommenttime,
+		hcphoto FROM users,hotel,hcomment 
+		WHERE hcomment.uid = users.id AND hcomment.hid = hotel.id 
+		GROUP BY hid
+		ORDER BY hreadnum DESC LIMIT 0,2 
+	</select>
+	
+	<!-- 用户id，查找酒店点评 -->
+	<select id="getHotelCommentByUId" parameterType="int" resultType="com.hz.model.HotelComment">
+		SELECT hotel.id,hotel.hname,hcomment.id,hid,hcomment,hcommenttime,hcphoto
+		FROM hotel,hcomment WHERE hotel.id = hcomment.hid AND uid = #{id}
+	</select>
+	
+	<select id="getHotelCommentTotalByUId" parameterType="int" resultType="long">
+		SELECT COUNT(*) FROM hcomment WHERE uid = #{id}
+	</select>
+	
+	<select id="getHotelComment2ByUId" parameterType="int" resultType="com.hz.model.HotelComment">
+		SELECT hotel.id,hotel.hname,hotel.hphoto,hcomment.id,hid,hcomment,hcommenttime,hcphoto
+		FROM hotel,hcomment WHERE hotel.id = hcomment.hid AND uid = #{id}
+		ORDER BY hcommenttime desc
+	</select>
+	
+	<!-- 后台删除 -->
+	<delete id="deleteHComment" parameterType="int">
+		DELETE FROM hcomment WHERE id = #{id}
+	</delete>
+	
+	<!-- 获取酒店点评列表 -->
+	<select id="getHotelCommentListById" parameterType="int" resultType="com.hz.model.HotelComment">
+		SELECT  users.id,users.username,users.photo,hcomment.id,hcomment.hid,hcomment,hcommenttime,
+		hcphoto FROM users,hcomment WHERE users.id = hcomment.uid AND hid = #{id}
+	</select>
+	
+	<!-- 酒店点评总数 -->
+	<select id="getHotelCommentListTotalById" parameterType="int" resultType="long">
+		SELECT COUNT(*) FROM hcomment WHERE hid = #{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.RoleMapper">
+
+	<!-- 查找用户列表 -->
+	<select id="getRoleList" resultType="com.hz.model.Role">
+		SELECT * FROM role
+	</select>
+	
+	<!-- 用户总数 -->
+	<select id="getRoleListTotal" resultType="long">
+		select count(*) from role
+	</select>
+	
+	<insert id="saveRole" parameterType="com.hz.model.Role">
+		INSERT INTO role (NAME)
+		VALUES (#{role.name})
+	</insert>
+	
+	<update id="updateRole" parameterType="com.hz.model.Role">
+		UPDATE role set name = #{role.name}
+		where id = #{role.id}
+	</update>
+	
+	<delete id="deleteRole" parameterType="int">
+		delete from role where id = #{id}
+	</delete>
+	
+	<select id="getRoleById" parameterType="int" resultType="com.hz.model.Role">
+		select * from role where id = #{id}
+	</select>
+
+</mapper>

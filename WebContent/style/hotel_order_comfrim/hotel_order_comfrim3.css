@@ -1,0 +1,539 @@
+	.mod-title {
+	margin-bottom: 0px;
+}
+
+.hotel-panel .extra,
+.room-item .sub {
+	cursor: context-menu;
+}
+
+.room-item .sub {
+	position: relative;
+	z-index: 1;
+	padding-top: 10px;
+	font-size: 13px;
+	display: inline-block;
+}
+
+.extra-tips {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 150px;
+	padding: 20px;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.8);
+	opacity: 0;
+	text-align: left;
+	-webkit-transition: opacity ease-in .3s;
+	-moz-transition: opacity ease-in .3s;
+	transition: opacity ease-in .3s;
+	webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.extra-tips.show {
+	opacity: 1;
+	z-index: 31;
+}
+
+.ui-input input,
+.special-panel textarea {
+	box-sizing: content-box;
+}
+
+.room-item .ui-input {
+	width: 167px;
+}
+
+.room-item .ui-input input {
+	padding-right: 25px;
+}
+
+.ui-input.ui-input-long {
+	width: 343px;
+}
+
+.ui-input.ui-input-long input {
+	width: 326px;
+}
+
+.ui-hide {
+	display: none!important;
+}
+
+.sub .text {
+	padding-left: 10px;
+}
+
+.tips-question {
+	vertical-align: 2px;
+}
+
+.special-panel .ui-input {
+	width: 390px;
+	height: auto;
+}
+
+.special-panel textarea {
+	resize: none;
+}
+
+.ui-input.ui-input-error textarea {
+	border-color: #ff584b;
+}
+
+.ui-input.ui-input-focus textarea {
+	border-color: #ff9d00;
+}
+
+.ui-input.ui-input-success textarea {
+	border-color: #666;
+}
+
+.line {
+	margin: 10px 0;
+}
+
+.f-row {
+	margin: 0;
+}
+
+.ui-select {
+	width: 343px;
+	margin-top: 10px;
+}
+
+.ui-select .trigger {
+	padding: 0 10px;
+}
+
+.ui-select em.name {
+	font-size: 12px;
+	letter-spacing: 1px;
+	font-style: normal;
+	color: #999;
+}
+
+.ui-select .sel-bd {
+	display: block;
+	opacity: 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webket-transform: translateY(15px);
+	-moz-transform: translateY(15px);
+	transform: translateY(15px);
+	-webket-transition: all .3s ease-in-out 0s;
+	-moz-transition: all .3s ease-in-out 0s;
+	transition: all .3s ease-in-out 0s;
+}
+
+.ui-select.ui-select-long {
+	width: 390px;
+	margin-top: 0px;
+	border-color: #666;
+}
+
+.name-list-container .f-row {
+	padding-bottom: 10px;
+}
+
+.name-list-container,
+.room-item .tips {
+	position: relative;
+	z-index: 1;
+}
+
+.room-item .tips {
+	margin: 0;
+	padding-top: 5px;
+}
+
+.coupon-container,
+.insure-container,
+.honey-container {
+	display: none;
+}
+
+.coupon-num,
+.insure-num,
+.honey-num,
+.total-rate {
+	font-style: normal;
+}
+
+.ui-plain {
+	padding-right: 10px;
+}
+
+.ui-plain em {
+	font-size: 13px;
+	font-style: normal;
+	color: #333;
+}
+
+
+/* .order-side, */
+
+.plain-container,
+.select-container {
+	opacity: 0;
+	-webkit-transition: opacity ease-in .5s;
+	-moz-transition: opacity ease-in .5s;
+	transition: opacity ease-in .5s;
+}
+
+
+/* .order-side.show, */
+
+.plain-container.show,
+.select-container.show {
+	opacity: 1;
+}
+
+.select-container {
+	margin: 0;
+}
+
+.order-side .state {
+	padding: 10px;
+}
+
+.coupon-panel li {
+	height: 80px;
+}
+
+.coupon-panel .value {
+	height: 81px;
+	background-position: 0 -180px;
+}
+
+.hotel-panel .subtitle {
+	margin-bottom: 10px;
+}
+
+.hotel-panel .rate {
+	vertical-align: -2px;
+}
+
+
+/* 取消险相关 */
+
+.price_pp {
+	font-style: normal;
+}
+
+.cancel-panel .icon-checkbox {
+	border: 1px solid #ff4638;
+}
+
+.cancel-panel .icon-checkbox.checked:after {
+	border-bottom: 2px solid #ff4638;
+	border-left: 2px solid #ff4638;
+}
+
+._j_cancel-price {
+	color: #ff4638;
+}
+
+._j_cancel-price .k-spinner,
+.price .k-spinner,
+._j_honey-num .k-spinner {
+	left: 0;
+	width: 10px;
+	height: 10px;
+}
+
+._j_cancel-price .k-bubble-1,
+._j_cancel-price .k-bubble-2,
+.price .k-bubble-1,
+.price .k-bubble-2,
+._j_honey-num .k-bubble-1,
+._j_honey-num .k-bubble-2 {
+	width: 5px;
+	height: 5px;
+	background-color: #f95555;
+}
+
+.honey-panel,
+.limit-panel {
+	margin-bottom: 20px;
+	border: 1px solid #d9d9d9;
+	padding: 15px 25px;
+	background-color: #fefdfd;
+	border-radius: 4px;
+	color: #333;
+	line-height: 24px;
+}
+
+.honey-panel::after,
+.limit-panel::after {
+	content: '';
+	display: table;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+}
+
+.limit-panel {
+	display: none;
+}
+
+.invoice-panel .icon-checkbox,
+.honey-panel .icon-checkbox {
+	display: inline-block;
+	float: left;
+	margin-top: 3px;
+	margin-right: 8px;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #333;
+	border-radius: 3px;
+	position: relative;
+}
+
+.invoice-panel .icon-checkbox.checked::after,
+.honey-panel .icon-checkbox.checked::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 5px;
+	border-bottom: 2px solid #333;
+	border-left: 2px solid #333;
+	transform: rotate(-45deg);
+	left: 3px;
+	top: 2px;
+}
+
+.invoice-panel {
+	position: relative;
+}
+
+.invoice-switch-btn-container {
+	position: absolute;
+	top: 18px;
+	right: 25px;
+}
+
+.invoice-switch-btn {
+	display: none;
+}
+
+.invoice-switch-btn-label {
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+	width: 40px;
+	height: 20px;
+	border-radius: 20px;
+	box-shadow: #d7d7d7 0px 0px 0px 1px;
+	background-color: #d7d7d7;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.invoice-switch-btn-label::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	border-radius: 20px;
+	background-color: #fff;
+	z-index: 1;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+label.invoice-switch-btn-label.invoice-switch-btn-label-checked::before {
+	left: 20px;
+}
+
+label.invoice-switch-btn-label.invoice-switch-btn-label-checked {
+	background-color: #ff9d00;
+}
+
+.invoice-panel .f-row {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.invoice-panel .frequent {
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+
+.invoice-panel .radio {
+	padding: 0 25px;
+}
+
+.inactive-coupon {
+	position: relative;
+	margin: 5px;
+	font-size: 14px;
+	color: #333;
+	line-height: 24px;
+}
+
+.coupon-inactive-list li {
+	float: none;
+	display: block;
+	border: none;
+	width: auto;
+	height: 110px;
+}
+
+.coupon-inactive-list li:hover {
+	border-color: #d9d9d9;
+}
+
+.coupon-inactive-list .coupon-desc {
+	float: left;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.coupon-inactive-card {
+	float: left;
+	display: inline;
+	margin: 0 348px 0 0;
+	height: 80px;
+	width: 250px;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+	position: relative;
+	cursor: pointer;
+}
+
+.coupon-inactive-card .value {
+	background-color: #d9d9d9;
+}
+
+.coupon-panel em {
+	font-style: normal;
+}
+
+@media (min-resolution: 1.25dppx),
+(-webkit-min-device-pixel-ratio: 1.25),
+not all {
+	.invoice-panel .radio.current::after,
+	.form-panel .radio.current::after {
+		background-image: url(http://images.mafengwo.net/images/youyu/order/sprites-v2.5@2x.png);
+		background-size: 300px auto;
+	}
+}
+
+.header-wrapper .head-logo a {
+	background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-up-logo@2x.png);
+	background-size: 170px auto;
+}
+
+.youyu-footer .foot-logo {
+	background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-down-logo@2x.png);
+	background-size: 128px auto;
+	background-position: 0 0;
+}
+
+@media (min-resolution: 1.25dppx),
+(-webkit-min-device-pixel-ratio: 1.25),
+not all {
+	.header-wrapper .head-logo a {
+		background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-up-logo@2x.png);
+		background-size: 170px auto;
+	}
+	.youyu-footer .foot-logo {
+		background-image: url(http://images.mafengwo.net/images/hotel/newlogo/form-down-logo@2x.png);
+		background-size: 128px auto;
+		background-position: 0 0;
+	}
+}
+
+.phone-ex-container {
+	float: left;
+	display: inline-block;
+	margin-right: 5px;
+	border: 1px solid #666;
+	width: 50px;
+	height: 31px;
+	line-height: 31px;
+	text-align: center;
+	font-size: 12px;
+	color: #333;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.popup-container .pop-bd.pop-bank .bank-box {
+	margin-left: 0;
+}
+
+.popup-container .pop-bd.pop-bank .bank-nav,
+.popup-container .pop-bd.pop-bank .bank-box {
+	height: 300px;
+}
+
+
+/* 有房保障 */
+
+.expense-detail .bd li.hotel-insure-tit-wrap {
+	line-height: 18px;
+	border-bottom: none;
+}
+
+.expense-detail .bd li.hotel-insure-tit-wrap .hotel-insure-tit {
+	position: relative;
+	width: 259px;
+	height: 21px;
+	line-height: 22px;
+	padding-left: 12px;
+	color: #333333;
+}
+
+.expense-detail .bd li.hotel-insure-tit-wrap .hotel-insure-tit:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translate(0, -50%);
+	width: 6px;
+	height: 6px;
+	border-radius: 3px;
+	background: #FF8A00;
+}
+
+.expense-detail .bd li.hotel-insure-tit-wrap .hotel-insure-desc {
+	color: #999999;
+}
+
+.hotel-insure-explain {
+	padding: 0 15px;
+	margin: 15px 0;
+	color: #FF8A00;
+	cursor: pointer;
+}
+
+.order-side-wrap {
+	float: right;
+	opacity: 0;
+	-webkit-transition: opacity ease-in .5s;
+	-moz-transition: opacity ease-in .5s;
+	transition: opacity ease-in .5s;
+}
+
+.order-side-wrap.show {
+	opacity: 1;
+}
+
+.order-side-wrap.fixed {
+	position: fixed;
+	left: 50%;
+	top: 0;
+	z-index: 30;
+	margin-left: 170px;

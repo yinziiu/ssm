@@ -1,0 +1,102 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.ViewTicketMapper">
+
+	<!-- 首页商场列表 -->
+	<select id="getViewTicketList" resultType="com.hz.model.ViewTicket" >
+		SELECT view.id vid,view.vname,vticket.id,vticket.vid,vticket.tname,
+		  vticket.ttype,vticket.tprice,vticket.sales 
+		  FROM vticket,VIEW WHERE vticket.vid = view.id
+		  ORDER BY sales DESC LIMIT 0,4
+	</select>
+	
+	<!--商场按浏览排 -->
+	<select id="getViewShopping" resultType="com.hz.model.ViewTicket">
+		SELECT view.id vid,view.vreadnum,view.location,view.vname,view.viewphoto,vticket.id,vticket.vid,
+		vticket.tname,vticket.ttype,vticket.tprice,vticket.sales
+		FROM VIEW,vticket WHERE view.id = vticket.vid 
+	    ORDER BY view.vreadnum DESC
+	</select>
+	
+	<!-- 商场按销量 -->
+	<select id="getViewShopping2" resultType="com.hz.model.ViewTicket">
+		SELECT view.id,view.vreadnum,view.location,view.vname,view.viewphoto,vticket.id vtkid,
+		vticket.vid,vticket.tname,vticket.ttype,vticket.tprice,vticket.sales
+		 FROM VIEW,vticket WHERE view.id = vticket.vid ORDER BY sales DESC LIMIT 0,15
+	</select>
+	
+	<!-- 根据id查找门票 -->
+	<select id="getViewTicketByID" parameterType="int" resultType="com.hz.model.ViewTicket">
+		SELECT view.id vid,view.vname,vticket.id,vticket.vid,vticket.tname,
+		vticket.ttype,vticket.tprice,vticket.sales
+		FROM vticket,VIEW WHERE vticket.vid = view.id
+		AND vid = #{id}
+	</select>
+	
+	<select id="getViewTicketByTID" parameterType="int" resultType="com.hz.model.ViewTicket">
+		SELECT * FROM vticket WHERE vticket.id = #{id}
+	</select>
+	
+	<select id="getViewTicketByTID2" parameterType="int" resultType="com.hz.model.ViewTicket">
+		SELECT * FROM vticket WHERE vticket.id = #{id}
+	</select>
+	
+	<!-- 后台门票 -->
+	<select id="getViewTicketList_1" resultType="com.hz.model.ViewTicket">
+		SELECT view.id vid,view.vname,view.viewphoto,vticket.id,vid,tname,ttype,tprice,sales
+		FROM vticket,VIEW WHERE view.id = vticket.vid
+	</select>
+	
+	<select id="getViewTicketList_2" parameterType="int" resultType="com.hz.model.ViewTicket">
+		SELECT view.id vid,view.vname,view.viewphoto,vticket.id,vid,tname,ttype,tprice,sales
+		FROM vticket,VIEW WHERE view.id = vticket.vid AND vid = #{id}
+	</select>
+	
+	<select id="getViewTicketListTotal2" parameterType="int" resultType="long">
+		SELECT COUNT(*) FROM vticket where vid = #{id}
+	</select>
+	
+	<select id="getViewTicketListTotal" resultType="long">
+		SELECT COUNT(*) FROM vticket
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteViewTicket" parameterType="int">
+		delete from vticket where id = #{id}
+	</delete>
+	
+	<insert id="saveViewTicket" parameterType="com.hz.model.ViewTicket">
+		INSERT INTO vticket 
+		(vid,tname,ttype,tprice) VALUES
+		(#{viewTicket.vid},#{viewTicket.tname},#{viewTicket.ttype},#{viewTicket.tprice})
+	</insert>
+	
+	<select id="getViewTicketById" parameterType="int" resultType="com.hz.model.ViewTicket">
+		SELECT view.id vid,view.vname,vticket.id,vid,tname,ttype,tprice 
+		FROM vticket,VIEW WHERE vticket.vid = view.id AND vticket.id = #{id}
+	</select>
+	
+	<update id="updateViewTicket" parameterType="com.hz.model.ViewTicket">
+		UPDATE hzmsjd.vticket SET
+			tname = #{viewTicket.tname} , 
+			ttype = #{viewTicket.ttype}, 
+			tprice = #{viewTicket.tprice}
+		WHERE id = #{viewTicket.id}
+	</update>
+	
+	<select id="getTicketListByTname" parameterType="String" resultType="com.hz.model.ViewTicket">
+		SELECT view.id vid,view.vname,vticket.id,vid,tname,ttype,tprice 
+		FROM vticket,VIEW WHERE vticket.vid = view.id AND vticket.tname like concat('%',#{tname},'%') 
+	</select>
+	
+	<!-- 根据id查找销量 -->
+	<select id="getSalesById" parameterType="int" resultType="com.hz.model.ViewTicket">
+		SELECT * FROM vticket WHERE id = #{id}
+	</select>
+	
+	<update id="updateViewTicketSales" parameterType="com.hz.model.ViewTicket">
+		UPDATE hzmsjd.vticket SET
+			sales = #{viewTicket2.sales} 
+		WHERE id = #{viewTicket2.id}
+	</update>
+	
+</mapper>

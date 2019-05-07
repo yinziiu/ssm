@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.NotesMapper">
+
+	<!-- 查找用户列表 -->
+	<select id="getNotesList" resultType="com.hz.model.Notes">
+		SELECT notes.id, users.username,users.photo,notesname,notescomment,notesphoto,notestime,nreadnum
+		FROM users,notes WHERE users.id = notes.uid
+	</select>
+	
+	<!-- 用户总数 -->
+	<select id="getNotesListTotal" resultType="long">
+		select count(*) from notes
+	</select>
+	
+	<select id="getNotesList1" resultType="com.hz.model.Notes">
+		SELECT notes.id, users.username,users.photo,notesname,notescomment,notesphoto,notestime,notes.nreadnum
+		FROM users,notes WHERE users.id = notes.uid 
+	</select>
+	
+	<select id="getNotesList2" resultType="com.hz.model.Notes">
+			SELECT notes.id,notesname,notescomment,notesphoto,notestime
+		FROM notes  ORDER BY notestime DESC LIMIT 0,5
+	</select>
+	
+	<select id="getNotesListById" parameterType="int" resultType="com.hz.model.Notes">
+		SELECT users.id uid,users.username,users.photo,notes.id,notesname,
+		notescomment,notesphoto,notestime,nreadnum 
+		FROM users,notes WHERE users.id = notes.uid AND notes.id = #{id}
+	</select>
+	
+	<select id="getNotesListById2" parameterType="int" resultType="com.hz.model.Notes">
+		SELECT users.id uid,users.username,users.photo,notes.id,notesname,
+		notescomment,notesphoto,notestime,nreadnum 
+		FROM users,notes WHERE users.id = notes.uid AND notes.id = #{id}
+	</select>
+	
+	<select id="getNotesList2ById" parameterType="int" resultType="com.hz.model.Notes">
+		SELECT users.id uid,users.username,users.photo,notes.id,notesname,
+		notescomment,notesphoto,notestime,nreadnum 
+		FROM users,notes WHERE users.id = notes.uid AND notes.id = #{id}  
+		ORDER BY notestime DESC LIMIT 0,5
+	</select>
+	
+	<!-- 根据用户id，查找个人游记信息 -->
+	<select id="getNotesByUId" parameterType="int" resultType="com.hz.model.Notes">
+		SELECT * FROM notes WHERE uid = #{id}
+	</select>
+	
+	<!-- 根据用户id，查找个人游记信息总数 -->
+	<select id="getNotesTotalByUId" parameterType="int" resultType="long">
+		SELECT count(*) FROM notes WHERE uid = #{id}
+	</select>
+	
+	<select id="getNotes2ByUId" parameterType="int" resultType="com.hz.model.Notes">
+		SELECT notes.id,notesname,notestime,notescomment,nreadnum,notesphoto FROM notes 
+		WHERE uid = #{id}  ORDER BY notestime DESC
+	</select>
+	
+	
+	<!-- 后台删除 -->
+	<delete id="deleteNotes" parameterType="int">
+		DELETE FROM notes WHERE id = #{id}
+	</delete>
+	
+	<insert id="saveNotes" parameterType="com.hz.model.Notes">
+		INSERT INTO hzmsjd.notes 
+		(uid,notesname,notescomment,notesphoto,notestime)
+		VALUES
+		(#{notes.uid},#{notes.notesname},#{notes.notescomment},#{notes.notesphoto},#{notes.notestime})
+	</insert>
+	
+	<update id="updateNotes" parameterType="com.hz.model.Notes">
+		UPDATE hzmsjd.notes SET
+			uid = #{notes.uid}, 
+			notesname = #{notes.notesname} , 
+			notescomment = #{notes.notescomment} , 
+			notesphoto = #{notes.notesphoto}, 
+			notestime = #{notes.notestime}
+		WHERE id = #{notes.id}
+	</update>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.HotelOrderMapper">
+	
+	<select id="getHotelOrderList" resultType="com.hz.model.HotelOrder">
+		SELECT users.id uid,users.username,users.photo,hotel.hname,hotel.id hid,hotel.hphoto,hotel.phone,hroomtypeprice.id htpid,htype,hprice,roomphoto,
+		horder.id id,roomnum,checkintime,checkouttime,hordernum,booktime,STATUS 
+		FROM hroomtypeprice,hotel,horder,users WHERE horder.hid = hotel.id AND 
+		hroomtypeprice.id = horder.htpid AND users.id = horder.uid
+	</select>
+	
+	<select id="getHotelOrderListtotal" resultType="long">
+		SELECT COUNT(*) FROM horder 
+	</select>
+	
+	<select id="getHotelOrderListByUId" parameterType="int" resultType="com.hz.model.HotelOrder">
+		SELECT hotel.hname,hotel.id hid,hotel.hphoto,hotel.phone,hroomtypeprice.id htpid,htype,hprice,roomphoto,
+		horder.id id,roomnum,checkintime,checkouttime,hordernum,booktime,STATUS 
+		FROM hroomtypeprice,hotel,horder WHERE horder.hid = hotel.id AND 
+		hroomtypeprice.id = horder.htpid AND uid = #{id}
+	</select>
+	
+	<select id="getHotelOrderTotalByUId" parameterType="int" resultType="long">
+		SELECT COUNT(uid) FROM horder where  uid = #{id}
+	</select>
+	
+	<select id="getHotelOrderListById" parameterType="int" resultType="com.hz.model.HotelOrder">
+		SELECT hotel.hname,hotel.id hid,hotel.hphoto,hotel.phone,hotel.Address,hroomtypeprice.id htpid,htype,hnum,hprice,roomphoto,
+		horder.id id,roomnum,checkintime,checkouttime,hordernum,booktime,relationname,
+		relationphone,STATUS
+		FROM hroomtypeprice,hotel,horder WHERE horder.hid = hotel.id AND 
+		hroomtypeprice.id = horder.htpid AND horder.id = #{id}
+	</select>
+	
+	<insert id="saveHotelOrder" parameterType="com.hz.model.HotelOrder">
+		INSERT INTO hzmsjd.horder 
+		(uid,hid,htpid,roomnum,checkouttime,checkintime,relationname,relationphone,hordernum,booktime,status)
+		VALUES
+		(#{hotelOrder.uid},#{hotelOrder.hid},#{hotelOrder.htpid},#{hotelOrder.roomnum},#{hotelOrder.checkouttime},#{hotelOrder.checkintime},
+		#{hotelOrder.relationname},#{hotelOrder.relationphone},#{hotelOrder.hordernum},#{hotelOrder.booktime},#{hotelOrder.status})
+	</insert>
+	
+	<update id="updateStatus" parameterType="com.hz.model.HotelOrder">
+		update hzmsjd.horder set 
+			status = #{hotelOrder.status}
+		where id = #{hotelOrder.id}
+	</update>
+	
+	<delete id="deleteHotelOrder" parameterType="int">
+		delete from hzmsjd.horder where id = #{id}
+	</delete>
+	
+	
+</mapper>

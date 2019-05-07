@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.StrategyMapper">
+
+	<!-- 查找用户列表 -->
+	<select id="getStrategyList" resultType="com.hz.model.Strategy">
+		SELECT * FROM strategy
+	</select>
+	
+	<!-- 用户总数 -->
+	<select id="getStrategyListTotal" resultType="long">
+		select count(*) from strategy
+	</select>
+	
+	<!-- 查找列表 -->
+	<select id="getStrategyList2" resultType="com.hz.model.Strategy">
+		SELECT * FROM strategy
+		ORDER BY sttime DESC LIMIT 0,3 
+	</select>
+	
+	<!-- 查找列表 -->
+	<select id="getStrategyList3" resultType="com.hz.model.Strategy">
+		SELECT * FROM strategy
+	</select>
+	
+	<select id="getStrategyList4" resultType="com.hz.model.Strategy">
+		SELECT id,stname,streadnum,stcontent,stphoto FROM strategy ORDER BY streadnum DESC LIMIT 0,3
+	</select>
+	
+	<select id="getStrategyListById" parameterType="int" resultType="com.hz.model.Strategy">
+		select * from strategy where id = #{id}	
+	</select>
+	
+	<select id="getStrategyList5" resultType="com.hz.model.Strategy">
+		SELECT id,stname,streadnum,stphoto,sttime FROM strategy ORDER BY streadnum DESC LIMIT 0,6
+	</select>
+	
+	<delete id="deleteStrategy" parameterType="int">
+		delete from strategy where id = #{id}	
+	</delete>
+	
+	<insert id="saveStrategy" parameterType="com.hz.model.Strategy">
+		INSERT INTO hzmsjd.strategy 
+		(stname,stcontent,sttime,stphoto,comefrom)VALUES
+		(#{strategy.stname},#{strategy.stcontent},#{strategy.sttime},#{strategy.stphoto},#{strategy.comefrom})
+	</insert>
+	
+	<select id="getStrategyById" parameterType="int" resultType="com.hz.model.Strategy">
+		select * from strategy where id = #{id}
+	</select>
+	
+	<update id="update_sphoto" parameterType="com.hz.model.Strategy">
+		update strategy set
+			stphoto = #{strategy.stphoto}
+		where id = #{strategy.id}
+	</update>
+	
+	<update id="update_Strategy" parameterType="com.hz.model.Strategy">
+		update strategy set
+			stname = #{strategy.stname},
+			stcontent = #{strategy.stcontent},
+			sttime = #{strategy.sttime},
+			comefrom = #{strategy.comefrom}
+		where id = #{strategy.id}
+	</update>
+
+</mapper>

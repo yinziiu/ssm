@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.ViewCommentMapper">
+	
+	<!-- 获取评论总列表 -->
+	<select id="getViewCommentList" resultType="com.hz.model.ViewComment">
+		SELECT users.username,users.photo,view.vname,vcomment.id,vcomment,vcommenttime,
+		vphoto FROM users,VIEW,vcomment 
+		WHERE vcomment.uid = users.id AND vcomment.vid = view.id
+	</select>
+	
+	<!-- 获取评论总列表总数 -->
+	<select id="getViewCommentListtotal" resultType="long">
+		select count(*) from vcomment
+	</select>
+	
+	
+	<select id="getViewCommentList2" resultType="com.hz.model.ViewComment">
+		SELECT users.username,users.photo,view.vname,view.vreadnum,vcomment.id,vid,vcomment,vcommenttime,
+		viewphoto FROM users,VIEW,vcomment 
+		WHERE vcomment.uid = users.id AND vcomment.vid = view.id
+		GROUP BY vid
+		ORDER BY vreadnum DESC LIMIT 0,2 
+	</select>
+	
+	<!-- 某景点的点评列表 -->
+	<select id="getViewCommentByID" parameterType="int"  resultType="com.hz.model.ViewComment">
+		SELECT users.id uid,users.photo,users.username,vcomment.id,vcomment.vcomment,
+		vcomment.vcommenttime,vcomment.vphoto FROM users,vcomment
+		WHERE users.id = vcomment.uid AND vid = #{id} order by vcommenttime desc
+	</select>
+	
+	<select id="getViewCommentTotalByID" parameterType="int"  resultType="long">
+		SELECT COUNT(*) FROM vcomment WHERE vid = #{id}
+	</select>
+	
+	<!-- 用户id，查找景点点评 -->
+	<select id="getViewCommentByUId" parameterType="int" resultType="com.hz.model.ViewComment">
+		SELECT view.id,view.vname,vcomment.id,vid,vcomment,vcommenttime,vphoto
+		FROM VIEW,vcomment WHERE view.id = vcomment.vid AND uid = #{id}
+	</select>
+	
+	<select id="getViewCommentTotalByUId" parameterType="int" resultType="long">
+		SELECT COUNT(*) FROM vcomment WHERE uid = #{id}
+	</select>
+	
+	<select id="getViewComment2ByUId" parameterType="int" resultType="com.hz.model.ViewComment">
+		SELECT view.id vid,view.vname,view.viewphoto,vcomment.id,
+		vcomment,vcommenttime,vphoto FROM VIEW,vcomment 
+		WHERE view.id = vcomment.vid AND uid = #{id}
+		ORDER BY vcommenttime DESC
+	</select>
+	
+	<select id="getViewCommentByUIdandVid" parameterType="com.hz.model.ViewComment" resultType="com.hz.model.ViewComment">
+		SELECT users.id uid,users.username, view.id,view.vname,vcomment.id,vid,vcomment,vcommenttime,vphoto
+		FROM VIEW,vcomment,users WHERE view.id = vcomment.vid AND users.id = vcomment.uid AND 
+		uid = #{viewComment.uid} AND vid = #{viewComment.vid}
+	</select>
+	
+	<select id="getViewCommentByUIdandVid2" parameterType="int" resultType="com.hz.model.ViewComment">
+		SELECT users.id uid,users.username, view.id vid,view.vname,vcomment.id,vid,uid,vcomment,vcommenttime,vphoto
+		FROM VIEW,vcomment,users WHERE view.id = vcomment.vid AND users.id = vcomment.uid AND 
+		uid = #{uid} AND vid = #{id}
+	</select>
+	
+	<insert id="saveViewComment" parameterType="com.hz.model.ViewComment">
+		INSERT INTO hzmsjd.vcomment 
+		(uid,vid,vcomment,vcommenttime,vphoto) VALUES
+		(#{viewComment.uid},#{viewComment.vid},#{viewComment.vcomment},
+		#{viewComment.vcommenttime},#{viewComment.vphoto})
+	</insert>
+	
+	<update id="updateViewComment" parameterType="com.hz.model.ViewComment">
+		UPDATE hzmsjd.vcomment SET
+			vcomment = #{viewComment.vcomment},
+			vcommenttime = #{viewComment.vcommenttime}
+		WHERE id = #{viewComment.id}
+	</update>
+	
+	<update id="updateViewCommentPhoto" parameterType="com.hz.model.ViewComment">
+		UPDATE hzmsjd.vcomment SET
+			vphoto = #{viewComment.vphoto}
+		WHERE id = #{viewComment.id}
+	</update>
+	
+	<!-- 后台删除景点点评 -->
+	<delete id="deleteVComment" parameterType="int">
+		DELETE FROM vcomment WHERE id = #{id}
+	</delete>
+	
+	
+</mapper>

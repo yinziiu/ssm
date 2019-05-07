@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.FoodMapper">
+
+	<!-- 查找用户列表 -->
+	<select id="getFoodList" resultType="com.hz.model.Food">
+		select * from food
+	</select>
+	
+	<!-- 用户总数 -->
+	<select id="getFoodListTotal" resultType="long">
+		select count(*) from food
+	</select>
+	
+	<!-- 按照浏览数输出 -->
+	<select id="getFoodList1" resultType="com.hz.model.Food">
+		SELECT food.id,fname,fcontent,fphoto,freadnum,address 
+		FROM food ORDER BY freadnum DESC
+	</select>
+	
+	<!-- 排行榜 -->
+	<select id="getFoodList2" resultType="com.hz.model.Food">
+		SELECT food.id,fname,fphoto,freadnum 
+		FROM food ORDER BY freadnum DESC LIMIT 0,10
+	</select>
+	
+	<!-- 根据id查询美食详情 -->
+	<select id="getFoodListByID" parameterType="int" resultType="com.hz.model.Food">
+		SELECT * FROM food WHERE id = #{id}
+	</select>
+	
+	<select id="gethotFoodList" resultType="com.hz.model.Food">
+		SELECT food.id,fname,address,fcontent,fphoto,freadnum
+		FROM food  LIMIT 0,3
+	</select>
+	
+	<delete id="deleteFood" parameterType="int">
+		delete from food where id = #{id}
+	</delete>
+	
+	<insert id="saveFood" parameterType="com.hz.model.Food">
+		INSERT INTO hzmsjd.food 
+		(fname,address,fcontent,expense,fphoto) VALUES
+		(#{food.fname},#{food.address},#{food.fcontent},#{food.expense},#{food.fphoto})
+	</insert>
+	
+	<select id="getFoodById" parameterType="int" resultType="com.hz.model.Food">
+		SELECT * FROM food WHERE id = #{id}
+	</select>
+	
+	<update id="updateFood" parameterType="com.hz.model.Food">
+		update hzmsjd.food set
+			fname = #{food.fname},
+			address = #{food.address},
+			fcontent = #{food.fcontent},
+			expense = #{food.expense}
+		where id = #{food.id}
+	</update>
+	
+	<update id="updateFPhoto" parameterType="com.hz.model.Food">
+		update hzmsjd.food set
+			fphoto = #{food.fphoto}
+		where id = #{food.id}
+	</update>
+	
+</mapper>

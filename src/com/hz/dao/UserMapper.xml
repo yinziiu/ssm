@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.UserMapper">
+	
+	<!-- 查找用户列表 -->
+	<select id="findUserList" resultType="com.hz.model.User">
+		SELECT * FROM users WHERE rid =1
+	</select>
+	
+	<!-- 用户总数 -->
+	<select id="getUserListTotal" resultType="long">
+		select count(*) from users where rid = 1
+	</select>
+	
+	<!-- 管理员列表 -->
+	<select id="getAdminUserList" resultType="com.hz.model.User">
+		SELECT role.id rid,role.name,users.id,rid,username,PASSWORD,
+		sex,birthday,city,phone,email,RESUME,photo 
+		FROM users,role WHERE role.id = users.rid AND rid > 1
+	</select>
+	
+	<!-- 查找用户列表 -->
+	<select id="getAdminUserListTotal" resultType="long">
+		SELECT count(*) FROM users WHERE rid > 1
+	</select>
+	
+	<!-- 根据用户名查找用户--> 
+	<select id="findUserByName" parameterType="String" resultType="com.hz.model.User">
+		select * from users where rid = 1 
+		<if test="username !=null and username!=''">
+			and username = #{username}
+		</if>
+	</select>
+	
+	<!-- 查找管理员--> 
+	<select id="findUserByName2" parameterType="String" resultType="com.hz.model.User">
+		SELECT role.id rid,role.name,users.id,rid,username,PASSWORD,
+		sex,birthday,city,phone,email,RESUME,photo 
+		FROM users,role WHERE role.id = users.rid AND rid > 1  
+		<if test="username !=null and username!=''">
+			and username = #{username}
+		</if>
+	</select>
+	
+	<!-- 检查用户名是否存在 -->
+	<select id="checkUser" parameterType="String" resultType="long">
+		SELECT COUNT(*) FROM users WHERE rid=1 
+			and username = #{username}
+	</select>
+	
+	
+	<!-- 添加用户 -->
+	<insert id="register" parameterType="com.hz.model.User">
+		INSERT INTO hzmsjd.users (username,PASSWORD,sex,birthday,city,phone,email,RESUME,photo,rid)
+		VALUES (#{user.username},#{user.password},#{user.sex},#{user.birthday},#{user.city},
+		#{user.phone},#{user.email},#{user.resume},#{user.photo},#{user.rid})
+	</insert>
+	
+	<!-- 添加管理员 -->
+	<insert id="addAdmin" parameterType="com.hz.model.User">
+		INSERT INTO hzmsjd.users (username,PASSWORD,sex,birthday,city,phone,email,RESUME,photo,rid)
+		VALUES (#{user.username},#{user.password},#{user.sex},#{user.birthday},#{user.city},
+		#{user.phone},#{user.email},#{user.resume},#{user.photo},#{user.rid})
+	</insert>
+	
+	<select id="getUserById" parameterType="int" resultType="com.hz.model.User">
+		select * from users where rid = 1 and id = #{id}
+	</select>
+	
+	<select id="getUserById2" parameterType="int" resultType="com.hz.model.User">
+		SELECT role.id rid,role.name,users.id,rid,username,PASSWORD,
+		sex,birthday,city,phone,email,RESUME,photo 
+		FROM users,role WHERE role.id = users.rid and users.id = #{id}
+	</select>
+	
+	<update id="updatePwd" parameterType="com.hz.model.User">
+		UPDATE users SET PASSWORD = #{user.password}
+		WHERE id = #{user.id}
+	</update>
+	
+	<update id="updateUser" parameterType="com.hz.model.User">
+		UPDATE users set
+			username=#{user.username},
+			sex=#{user.sex},
+			birthday=#{user.birthday},
+			city=#{user.city},
+			phone=#{user.phone},
+			email=#{user.email},
+			resume=#{user.resume}
+		where id = #{user.id}
+	</update>
+	
+	<update id="updatephoto" parameterType="com.hz.model.User">
+		UPDATE users set
+			photo=#{user.photo}
+		where id = #{user.id}
+	</update>
+	
+	<update id="updateUser2" parameterType="com.hz.model.User">
+		UPDATE users set
+			rid = #{user.rid},
+			username=#{user.username},
+			password=#{user.password},
+			sex=#{user.sex},
+			birthday=#{user.birthday},
+			city=#{user.city},
+			phone=#{user.phone},
+			email=#{user.email},
+			resume=#{user.resume}
+		where id = #{user.id}
+	</update>
+	
+	<update id="updateAdmin" parameterType="com.hz.model.User">
+		UPDATE users set
+			rid = #{user.rid},
+			username=#{user.username},
+			password=#{user.password},
+			sex=#{user.sex},
+			birthday=#{user.birthday},
+			city=#{user.city},
+			phone=#{user.phone},
+			email=#{user.email},
+			resume=#{user.resume}
+		where id = #{user.id}
+	</update>
+	
+	<!-- 其他和超级管理员删除用户 -->
+	<delete id="deleteUser" parameterType="int">
+		delete from users where  id = #{id} 
+	</delete>
+	
+	<select id="getUserByRId" parameterType="int" resultType="com.hz.model.User">
+		select * from users where rid = #{id}
+	</select>
+
+</mapper>

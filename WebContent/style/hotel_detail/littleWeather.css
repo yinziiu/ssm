@@ -1,0 +1,13 @@
+.littleWeather{
+    float: none;
+    padding: 0;
+    width: auto;
+    font-size: 12px;
+    color: #999;
+    line-height: 25px;
+}
+.littleWeather a{
+    text-decoration: none;
+    color: #999;
+    line-height: 25px;
+}

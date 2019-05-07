@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.dao.ViewOrderMapper">
+	
+	<select id="getViewOrderList" resultType="com.hz.model.ViewOrder">
+		SELECT users.id uid,users.username,users.photo,view.id vid,view.vname,vticket.id vtid,vticket.vid,vticket.tname,vticket.ttype,vticket.tprice,vticket.sales,
+		vorder.id,tratime,vorder.booktime,ordertotal,bookname,bookphone,remark,ordernumber ,STATUS
+		FROM vticket,vorder,users,VIEW WHERE vorder.vtid = vticket.id AND users.id = vorder.uid
+		AND view.id = vticket.vid
+	</select>
+	
+	<select id="getViewOrderListtotal" resultType="long">
+		select count(*) from vorder 
+	</select>
+	
+	<select id="getViewOrderTotalByUID" parameterType="int" resultType="long">
+		SELECT count(uid) FROM vorder WHERE  uid = #{id}
+	</select>
+	
+	<select id="getViewOrderListByUID" parameterType="int" resultType="com.hz.model.ViewOrder">
+		SELECT view.id vid,view.vname,view.viewphoto,vorder.id,uid,vid,tratime,vorder.booktime,ordertotal,ordernumber,STATUS,vticket.id tid,vticket.tname,
+		vticket.ttype,vticket.tprice,vticket.sales FROM vorder,vticket,VIEW
+		WHERE vorder.vtid = vticket.id  AND view.id = vticket.vid AND uid = #{id}
+	</select>
+	
+	<select id="getViewOrderListById" parameterType="int" resultType="com.hz.model.ViewOrder">
+		SELECT view.id vid,view.vname,view.viewphoto,vorder.id,uid,vid,tratime,vorder.booktime,
+		bookname,bookphone,remark,ordertotal,ordernumber,STATUS,vticket.id tid,vticket.tname,
+		vticket.ttype,vticket.tprice,vticket.sales FROM vorder,vticket,VIEW
+		WHERE vorder.vtid = vticket.id  AND 
+		vticket.vid = view.id  AND vorder.id = #{id}
+	</select>
+	
+	<!-- 后台删除 -->
+	<delete id="deleteViewOrder" parameterType="int">
+		DELETE FROM vorder WHERE id = #{id}
+	</delete>
+	
+	<select id="getViewOrderListById2" parameterType="int" resultType="com.hz.model.ViewOrder">
+		SELECT users.id uid,users.username,users.photo,view.id vid,view.vname,vticket.id vtid,vticket.vid,vticket.tname,vticket.ttype,vticket.tprice,vticket.sales,
+		vorder.id,tratime,vorder.booktime,ordertotal,bookname,bookphone,remark,ordernumber ,STATUS
+		FROM vticket,vorder,users,VIEW WHERE vorder.vtid = vticket.id AND users.id = vorder.uid
+		AND view.id = vticket.vid and vorder.id = #{id}
+	</select>
+	
+	<update id="UpdateViewOrder" parameterType="com.hz.model.ViewOrder">
+		update vorder set
+			tratime = #{viewOrder.tratime},
+			ordertotal = #{viewOrder.ordertotal},
+			bookname = #{viewOrder.bookname},
+			bookphone = #{viewOrder.bookphone}
+		where id = #{viewOrder.id}
+	</update>
+	
+	<insert id="saveViewTicket" parameterType="com.hz.model.ViewOrder">
+		INSERT INTO hzmsjd.vorder 
+		(uid,vtid,tratime,booktime,ordertotal,bookname,bookphone,remark,ordernumber,STATUS)
+		VALUES
+		(#{viewOrder.uid},#{viewOrder.vtid},#{viewOrder.tratime},#{viewOrder.booktime},#{viewOrder.ordertotal}, 
+		#{viewOrder.bookname},#{viewOrder.bookphone},#{viewOrder.remark}, #{viewOrder.ordernumber}, #{viewOrder.status})
+	</insert>
+	
+	<update id="updateStatus" parameterType="com.hz.model.ViewOrder">
+		update vorder set
+			status = #{viewOrder.status}
+		where id = #{viewOrder.id}
+	</update>
+	
+</mapper>
